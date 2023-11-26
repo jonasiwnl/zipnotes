@@ -26,15 +26,28 @@ fn App() -> Html {
 
     html! {
         <div>
-            <textarea oninput={type_handler} value={(&*notes).clone()} spellcheck={"false"} />
+            <textarea oninput={type_handler} value={(&*notes).clone()} spellcheck="false" />
             <style>
                 {r#"
                     textarea {
+                        color: #cad3f5;
                         width: 100%;
-                        height: 100%;
+                        height: 100vh;
                         font-size: 1.5rem;
-                        padding: 0.5rem;
                         border: none;
+                        outline: none;
+                        resize: none;
+                        margin: 20px;
+                        background: transparent;
+                    }
+                    /* This is so hacky... But I hate CSS */
+                    div {
+                        background-color: #181926;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
                     }
                 "#}
             </style>
