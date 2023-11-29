@@ -1,6 +1,11 @@
 use web_sys::{wasm_bindgen::{JsCast, UnwrapThrowExt}, HtmlTextAreaElement, HtmlInputElement};
 use yew::prelude::*;
 
+// ** TODO **
+// Make background coloring cover the entire thing
+// h1 and input font
+// Duplication cleanup
+
 #[function_component]
 fn App() -> Html {
     let window = web_sys::window().unwrap();
