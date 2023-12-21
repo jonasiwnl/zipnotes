@@ -17,7 +17,7 @@ FROM nginx:latest
 COPY --from=builder /usr/src/app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/www
 
-RUN sed -i  '97i application/wasm wasm;' /etc/nginx/mime.types
+# RUN sed -i  '97i application/wasm wasm;' /etc/nginx/mime.types
 
 ENTRYPOINT ["nginx"]
-CMD ["-g", "daemon off;"]
+CMD ["-gq", "daemon off;"]
