@@ -2,8 +2,6 @@ use web_sys::{wasm_bindgen::{JsCast, UnwrapThrowExt}, HtmlTextAreaElement, HtmlI
 use yew::prelude::*;
 
 // ** TODO **
-// Make background coloring cover the entire thing
-// h1 and input font
 // Duplication cleanup
 
 #[function_component]
@@ -68,18 +66,34 @@ fn App() -> Html {
         }
     });
 
+    let reset_handler = Callback::from({
+        let bg_color = bg_color.clone();
+        let text_color = text_color.clone();
+        move |_| {
+            set_storage("text_color", "cad3f5");
+            text_color.set("cad3f5".to_string());
+
+            set_storage("bg_color", "181926");
+            bg_color.set("181926".to_string());
+        }
+    });
+
     html! {
         <div class="container">
             <div>
                 <h1>{ "ZipNotes" }</h1>
                 <input type="text" oninput={bg_type_handler} value={(&*bg_color).clone()} />
                 <input type="text" oninput={text_type_handler} value={(&*text_color).clone()} />
+                <button onclick={reset_handler}> { "reset colors" } </button>
             </div>
             <textarea oninput={notes_type_handler} value={(&*notes).clone()} spellcheck="false" />
             <style>
                 {format!(r#"
-                    textarea {{
+                    body {{
+                        background-color: #{};
                         color: #{};
+                    }}
+                    textarea {{
                         width: 100%;
                         height: 100vh;
                         font-size: 1.5rem;
@@ -88,11 +102,12 @@ fn App() -> Html {
                         resize: none;
                         margin: 20px;
                         background: transparent;
+                        color: #{};
                     }}
                     h1 {{
-                        color: #{};
                         font-size: 3rem;
                         margin: 20px 0 0 20px;
+                        font-family: monospace;
                     }}
                     input {{
                         font-size: 1.5rem;
@@ -100,17 +115,18 @@ fn App() -> Html {
                         outline: none;
                         margin: 20px;
                         background: transparent;
+                        font-family: monospace;
+                        color: #{};
                     }}
-                    /* This is so hacky... But I hate CSS */
-                    .container {{
-                        background-color: #{};
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
+                    button {{
+                        font-size: 1.5rem;
+                        outline: none;
+                        margin: 20px;
+                        background: transparent;
+                        font-family: monospace;
+                        color: #{};
                     }}
-                "#, &*text_color, &*text_color, &*bg_color)}
+                "#, &*bg_color, &*text_color, &*text_color, &*text_color, &*text_color)}
             </style>
         </div>
     }

@@ -4,8 +4,8 @@ dev:
 build:
 	trunk build --release
 
-dbuild:
+image:
 	docker build -t zipnotes-img .
 
-drun:
+container:
 	docker run -p 8080:8080 --rm --name zipnotes zipnotes-img
