@@ -116,6 +116,7 @@ fn App() -> Html {
                         margin: 20px;
                         background: transparent;
                         color: #{};
+                        font-family: monospace;
                     }}
                     h1 {{
                         font-size: 3rem;
